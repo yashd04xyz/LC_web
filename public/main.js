@@ -94,7 +94,7 @@ if (newsletterForm) {
 }
 
 // Product filters
-const products = $$('#productGrid .product');
+let products = [];
 const filterCategory = $('#filterCategory');
 const filterSize = $('#filterSize');
 const filterColor = $('#filterColor');
@@ -348,5 +348,65 @@ function updateCartCount() {
   if (badge) badge.textContent = count;
 }
 
+async function loadProducts() {
+  try {
+    const response = await fetch('/product.json'); // adjust path if needed
+    const productsData = await response.json();
+
+    const grid = $('#productGrid');
+    grid.innerHTML = '';
+    products = $$('#productGrid .product');
+
+    productsData.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'card product';
+      card.dataset.category = p.Category;
+      card.dataset.size = p.Size;
+      card.dataset.color = p.Color;
+      card.dataset.occasion = p.Occasion;
+      card.dataset.price = p.ProductPrice;
+
+      card.innerHTML = `
+        <img src="${p.ProductImage}" alt="${p.ProductName}">
+        <div class="card-body">
+          <h3>${p.ProductName}</h3>
+          <div class="muted">${p.ProductInfo}</div>
+          <div class="price">Unit Price: ₹${p.ProductPrice}</div>
+          <div class="product-actions">
+            <button class="btn-outline quick-view"
+              data-id="${p.ProductID}"
+              data-name="${p.ProductName}"
+              data-price="₹${p.ProductPrice}"
+              data-img="${p.ProductImage}"
+              data-desc="${p.Description}">
+              Quick view
+            </button>
+            <button class="btn-primary add-to-cart"
+              data-product-id="${p.ProductID}"
+              data-qty="1">
+              Add to cart
+            </button>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    // Re-bind quick view buttons after rendering
+    $$('.quick-view', grid).forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        openModalFromButton(e.currentTarget);
+      });
+    });
+
+    // Update global products reference for filters
+    window.products = $$('#productGrid .product');
+    applyFilters();
+  } catch (err) {
+    console.error('Error loading products:', err);
+  }
+}
+
 // Run once on load to show existing count
 updateCartCount();
+document.addEventListener('DOMContentLoaded', loadProducts);
