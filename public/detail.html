@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Product — Lydia Creation</title>
+  <link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+  <!-- header same as other pages -->
+  <header class="nav header">
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-logo"><img src="/images/logo.png" alt="Lydia Creation logo"></div>
+        <div class="brand-name">Lydia Creation</div>
+      </div>
+      <nav class="nav-links">
+        <a href="/">Home</a>
+        <a href="/shop.html">Shop</a>
+        <a href="/cart.html">Cart</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <div id="productDetail" class="card"></div>
+    </section>
+  </main>
+
+  <script src="/js/main.js"></script>
+  <script>
+    // parse id from query
+    const params = new URLSearchParams(location.search);
+    const id = params.get('id');
+    async function loadProduct() {
+      if (!id) { document.getElementById('productDetail').innerHTML = '<p class="muted">No product specified.</p>'; return; }
+      const res = await fetch('/api/products/' + encodeURIComponent(id));
+      const data = await res.json();
+      if (!data.success) { document.getElementById('productDetail').innerHTML = '<p class="muted">Product not found.</p>'; return; }
+      const p = data.product;
+      document.getElementById('productDetail').innerHTML = `
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:16px;">
+          <div><img src="${p.img}" alt="${p.name}" style="border-radius:12px;"></div>
+          <div>
+            <h2>${p.name}</h2>
+            <div class="muted">${p.size} • ${p.color} • ${p.occasion}</div>
+            <div class="price">₹${p.price}</div>
+            <p class="muted">${p.desc}</p>
+            <div class="product-actions">
+              <button id="addCart" class="btn-primary">Add to cart</button>
+              <a href="/cart.html" class="btn-outline">Go to cart</a>
+            </div>
+          </div>
+        </div>`;
+      document.getElementById('addCart').addEventListener('click', () => {
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const existing = cart.find(i => i.productId === p.id);
+        if (existing) existing.qty += 1; else cart.push({ productId: p.id, qty: 1 });
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById('addCart').textContent = 'Added';
+        setTimeout(()=> document.getElementById('addCart').textContent = 'Add to cart', 800);
+      });
+    }
+    loadProduct();
+  </script>
+</body>
+</html>

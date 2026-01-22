@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog — Lydia Creation</title>
+  <link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+  <header class="nav header">
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-logo"><img src="/images\logo.png" alt="Lydia Creation logo"></div>
+        <div class="brand-name">Lydia Creation</div>
+      </div>
+      <nav class="nav-links">
+        <a href="/">Home</a>
+        <a href="#blog">Blog</a>
+        <a href="/shop.html">Shop</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="post">
+      <div class="section-header">
+        <h2 id="postTitle">Post title</h2>
+        <p id="postMeta" class="muted">Category • 5 min read</p>
+      </div>
+      <article id="postContent" class="card card-body">
+        <p class="muted">Blog content goes here. For demo, this is static. You can fetch posts from an API and render them here.</p>
+      </article>
+    </section>
+  </main>
+
+ <script src="/js/main.js"></script>
+<script>
+  // For demo: read ?slug= or ?id= and render static content
+  const params = new URLSearchParams(location.search);
+  const slug = params.get('slug') || 'monochrome-magic';
+  // In production fetch /api/posts/:slug
+  document.getElementById('postTitle').textContent = 'Monochrome magic: effortless elegance';
+  document.getElementById('postMeta').textContent = 'Fashion trends • 5 min read';
+  document.getElementById('postContent').innerHTML = `
+    <p>Explore how single-tone outfits create a refined silhouette and simplify your wardrobe.</p>
+    <p class="muted">This is a demo post. Replace with dynamic content from your CMS or backend.</p>
+  `;
+</script>
+</body>
+</html>

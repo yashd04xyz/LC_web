@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checkout — Lydia Creation</title>
+  <link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+  <header class="nav header">
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-logo"><img src="/images/logo.png" alt="Lydia Creation logo"></div>
+        <div class="brand-name">Lydia Creation</div>
+      </div>
+      <nav class="nav-links">
+        <a href="/Home">Home</a>
+        <a href="/product.html">Product</a>p</a>
+        <a href="/cart.html">Cart</a>
+          <a href="/contact.html">Contact</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <div class="section-header">
+        <h2>Checkout</h2>
+        <p>Enter your details to complete the order.</p>
+      </div>
+
+      <form id="checkoutForm">
+        <input id="name" placeholder="Full name" required>
+        <input id="email" type="email" placeholder="Email" required>
+        <input id="address" placeholder="Shipping address" required>
+        <input id="city" placeholder="City" required>
+        <input id="postal" placeholder="Postal code" required>
+        <button class="btn-primary" type="submit">Place order</button>
+       <div id="checkoutMsg" class="muted">Your order has been placed successfully!</div>
+      </form>
+    </section>
+  </main>
+
+  <script src="/js/main.js"></script>
+  <script src="/cart.js"></script>
+  <script>
+    document.getElementById('checkoutForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const city = document.getElementById('city').value.trim();
+      const postal = document.getElementById('postal').value.trim();
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      if (!cart.length) {
+        document.getElementById('checkoutMsg').textContent = 'Your cart is empty.';
+        return;
+      }
+      // For demo: send contact + cart to /api/contact and /api/cart
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, subject: 'Order', message: `Order for ${name}. Address: ${address}, ${city}, ${postal}. Cart: ${JSON.stringify(cart)}` })
+      });
+      const res = await fetch('/api/cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: cart })
+      });
+      const data = await res.json();
+      if (data.success) {
+        localStorage.removeItem('cart');
+        document.getElementById('checkoutMsg').textContent = 'Order placed. Thank you!';
+        document.getElementById('checkoutMsg').style.color = 'var(--success)';
+      } else {
+        document.getElementById('checkoutMsg').textContent = 'Unable to place order.';
+        document.getElementById('checkoutMsg').style.color = 'var(--error)';
+      }
+    });
+  </script>
+</body>
+</html>

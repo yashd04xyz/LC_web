@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lydia Creations — Contact</title>
+  <meta name="description" content="Get in touch with Lydia Creations for inquiries, collaborations, and custom orders." />
+
+  <style>
+    :root {
+      --bg: #0f1216;
+      --card: #151a21;
+      --text: #e9eef7;
+      --muted: #a9b4c7;
+      --accent: #7aa2ff;
+      --accent-2: #ffd27a;
+      --border: #243042;
+      --danger: #ff6b6b;
+      --success: #4caf50;
+      --focus: #9ec1ff;
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(122,162,255,0.08), transparent 60%),
+                  radial-gradient(900px 500px at 90% 10%, rgba(255,210,122,0.08), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: saturate(1.2) blur(8px);
+      background: rgba(15,18,22,0.75);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 6px 18px rgba(122,162,255,0.35);
+    }
+    .brand-name {
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      font-size: 1.05rem;
+    }
+    .nav {
+      display: flex;
+      gap: 18px;
+    }
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 8px 10px;
+      border-radius: 8px;
+      transition: color .2s ease, background .2s ease;
+    }
+    .nav a:hover,
+    .nav a[aria-current="page"] {
+      color: var(--text);
+      background: rgba(122,162,255,0.12);
+    }
+
+    /* Layout */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+    }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    /* Card */
+    .card {
+      background: linear-gradient(180deg, rgba(21,26,33,0.9), rgba(21,26,33,0.85));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .card-header {
+      padding: 22px 22px 0;
+    }
+    .eyebrow {
+      color: var(--muted);
+      font-size: 0.9rem;
+      letter-spacing: 0.3px;
+    }
+    .title {
+      margin: 6px 0 14px;
+      font-size: 1.6rem;
+      letter-spacing: 0.2px;
+    }
+    .subtitle {
+      color: var(--muted);
+      margin: 0 0 18px;
+      font-size: 0.98rem;
+    }
+    .card-body {
+      padding: 0 22px 22px;
+    }
+
+    /* Form */
+    form {
+      display: grid;
+      gap: 16px;
+    }
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+    label {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .input, .textarea, .select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0d1116;
+      color: var(--text);
+      outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .textarea { min-height: 140px; resize: vertical; }
+    .input:focus, .textarea:focus, .select:focus {
+      border-color: var(--focus);
+      box-shadow: 0 0 0 3px rgba(158,193,255,0.15);
+    }
+    .hint {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .error {
+      color: var(--danger);
+      font-size: 0.85rem;
+      display: none;
+    }
+
+    /* Actions */
+    .actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      transition: transform .06s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #5c86ff);
+      color: #140b12;
+      box-shadow: 0 10px 24px rgba(122,162,255,0.35);
+    }
+    .btn-primary:hover { transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    /* Contact info */
+    .info-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 8px;
+    }
+    .info-item {
+      display: grid;
+      gap: 4px;
+      padding: 12px;
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      background: rgba(13,17,22,0.6);
+    }
+    .info-label {
+      color: var(--muted);
+      font-size: 0.85rem;
+      letter-spacing: 0.3px;
+    }
+    .info-value {
+      font-size: 1rem;
+    }
+    .social {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.92rem;
+      background: rgba(13,17,22,0.6);
+      transition: border-color .2s ease, background .2s ease;
+    }
+    .chip:hover {
+      border-color: var(--accent);
+      background: rgba(122,162,255,0.12);
+    }
+
+    /* Footer */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      padding: 22px 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="Lydia Creations home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">Lydia Creations</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/" >Home</a>
+        <a href="/shop">Shop</a>
+        <a href="/about">About</a>
+        <a href="/contact" aria-current="page">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="container" id="main" tabindex="-1">
+    <div class="grid">
+      <!-- Contact form card -->
+      <section class="card" aria-labelledby="contact-title">
+        <div class="card-header">
+          <p class="eyebrow">Contact</p>
+          <h1 class="title" id="contact-title">Let’s create something beautiful</h1>
+          <p class="subtitle">Share your idea, request a quote, or ask a question. We’ll get back within 24–48 hours.</p>
+        </div>
+
+        <div class="card-body">
+          <form id="contactForm" novalidate>
+            <div class="field">
+              <label for="name">Full name</label>
+              <input class="input" type="text" id="name" name="name" placeholder="e.g., Yash Sharma" required aria-required="true" />
+              <span class="hint">So we know what to call you.</span>
+              <span class="error" id="nameError">Please enter your name.</span>
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input class="input" type="email" id="email" name="email" placeholder="you@example.com" required aria-required="true" />
+              <span class="hint">We’ll only use this to reply to you.</span>
+              <span class="error" id="emailError">Please enter a valid email address.</span>
+            </div>
+
+            <div class="field">
+              <label for="subject">Subject</label>
+              <input class="input" type="text" id="subject" name="subject" placeholder="Project inquiry, custom order, collaboration…" required aria-required="true" />
+              <span class="error" id="subjectError">Please add a subject.</span>
+            </div>
+
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea class="textarea" id="message" name="message" placeholder="Tell us about your vision, timeline, and any references." required aria-required="true"></textarea>
+              <span class="error" id="messageError">Please write a short message.</span>
+            </div>
+
+            <div class="actions">
+              <button type="submit" class="btn btn-primary">Send message</button>
+              <button type="reset" class="btn btn-outline">Reset</button>
+              <span id="formStatus" role="status" aria-live="polite" style="color: var(--muted);"></span>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Contact info card -->
+      <aside class="card" aria-labelledby="info-title">
+        <div class="card-header">
+          <p class="eyebrow">Details</p>
+          <h2 class="title" id="info-title">Reach us directly</h2>
+          <p class="subtitle">Prefer email or chat? Here are quick ways to connect.</p>
+        </div>
+
+        <div class="card-body">
+          <div class="info-list">
+            <div class="info-item">
+              <span class="info-label">Email</span>
+              <span class="info-value">hello@lydiacreations.com</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Phone</span>
+              <span class="info-value">+91 98XX-XXX-XXX</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Location</span>
+              <span class="info-value">Uttam Nagar, New Delhi, India</span>
+            </div>
+          </div>
+
+          <div class="social" aria-label="Social links">
+            <a class="chip" href="#" aria-label="Instagram">Instagram</a>
+            <a class="chip" href="#" aria-label="Facebook">Facebook</a>
+            <a class="chip" href="#" aria-label="YouTube">YouTube</a>
+            <a class="chip" href="#" aria-label="WhatsApp">WhatsApp</a>
+          </div>
+
+          <div style="margin-top:16px">
+            <p class="hint">Business hours: Mon–Sat, 10:00–18:00 IST</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    © <span id="year"></span> Lydia Creations — All rights reserved.
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple client-side validation + demo submission
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('formStatus');
+
+    function showError(id, show) {
+      const el = document.getElementById(id);
+      el.style.display = show ? 'block' : 'none';
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = '';
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      let valid = true;
+      showError('nameError', !name);
+      showError('emailError', !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email));
+      showError('subjectError', !subject);
+      showError('messageError', !message);
+
+      valid = name && subject && message && /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email);
+
+      if (!valid) {
+        status.textContent = 'Please fix the highlighted fields.';
+        return;
+      }
+
+      // Replace with your backend endpoint (e.g., /api/contact)
+      try {
+        // Demo: simulate network request
+        status.textContent = 'Sending…';
+        await new Promise(r => setTimeout(r, 900));
+        status.style.color = getComputedStyle(document.documentElement).getPropertyValue('--success');
+        status.textContent = 'Message sent! We’ll reply soon.';
+        form.reset();
+      } catch (err) {
+        status.style.color = getComputedStyle(document.documentElement).getPropertyValue('--danger');
+        status.textContent = 'Something went wrong. Please try again later.';
+      }
+    });
+  </script>
+</body>
+</html>
