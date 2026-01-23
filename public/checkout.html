@@ -4,80 +4,171 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Checkout — Lydia Creation</title>
-  <link href="main.css" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
 </head>
 <body>
-  <header class="nav header">
-    <div class="container nav">
-      <div class="brand">
-        <div class="brand-logo"><img src="/images/logo.png" alt="Lydia Creation logo"></div>
-        <div class="brand-name">Lydia Creation</div>
-      </div>
-      <nav class="nav-links">
-        <a href="/Home">Home</a>
-        <a href="/product.html">Product</a>p</a>
-        <a href="/cart.html">Cart</a>
-          <a href="/contact.html">Contact</a>
-      </nav>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span></button>
+
+<header class="nav header">
+  <div class="container nav">
+    <div class="brand">
+      <div class="brand-logo" aria-hidden="true"></div>
+      <div class="brand-name">Lydia Creation</div>
     </div>
-  </header>
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/shop.html">Shop</a>
+      <a href="/cart.html">Cart</a>
+      <a href="/checkout.html" class="active">Checkout</a>
+    </nav>
+  </div>
+</header>
 
-  <main class="container">
-    <section>
-      <div class="section-header">
-        <h2>Checkout</h2>
-        <p>Enter your details to complete the order.</p>
+<main class="container">
+  <section>
+    <h2>Checkout</h2>
+
+    <!-- Cart Summary -->
+    <div id="cartSummary" class="checkout-section">
+      <h3>Your Cart</h3>
+      <div id="cartItems"></div>
+      <div class="summary">
+        <p>Subtotal: <span id="subtotal">₹0</span></p>
+        <p>Shipping: <span id="shipping">₹0</span></p>
+        <p>Tax (18%): <span id="tax">₹0</span></p>
+        <p><strong>Total: <span id="total">₹0</span></strong></p>
       </div>
+    </div>
 
+    <!-- Shipping Form -->
+    <div class="checkout-section">
+      <h3>Shipping Information</h3>
       <form id="checkoutForm">
-        <input id="name" placeholder="Full name" required>
-        <input id="email" type="email" placeholder="Email" required>
-        <input id="address" placeholder="Shipping address" required>
-        <input id="city" placeholder="City" required>
-        <input id="postal" placeholder="Postal code" required>
-        <button class="btn-primary" type="submit">Place order</button>
-       <div id="checkoutMsg" class="muted">Your order has been placed successfully!</div>
-      </form>
-    </section>
-  </main>
+        <input type="text" id="shipName" placeholder="Full Name" required>
+        <input type="text" id="shipAddress" placeholder="Address" required>
+        <input type="text" id="shipCity" placeholder="City" required>
+        <input type="text" id="shipZip" placeholder="Postal Code" required>
+        <input type="tel" id="shipPhone" placeholder="Phone Number" required>
 
-  <script src="main.js"></script>
-  <script src="cart.js"></script>
-  <script>
-    document.getElementById('checkoutForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const address = document.getElementById('address').value.trim();
-      const city = document.getElementById('city').value.trim();
-      const postal = document.getElementById('postal').value.trim();
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-      if (!cart.length) {
-        document.getElementById('checkoutMsg').textContent = 'Your cart is empty.';
-        return;
-      }
-      // For demo: send contact + cart to /api/contact and /api/cart
-      await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, subject: 'Order', message: `Order for ${name}. Address: ${address}, ${city}, ${postal}. Cart: ${JSON.stringify(cart)}` })
-      });
-      const res = await fetch('/api/cart', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: cart })
-      });
-      const data = await res.json();
-      if (data.success) {
-        localStorage.removeItem('cart');
-        document.getElementById('checkoutMsg').textContent = 'Order placed. Thank you!';
-        document.getElementById('checkoutMsg').style.color = 'var(--success)';
-      } else {
-        document.getElementById('checkoutMsg').textContent = 'Unable to place order.';
-        document.getElementById('checkoutMsg').style.color = 'var(--error)';
-      }
-    });
-  </script>
+        <h3>Payment Method</h3>
+        <select id="paymentMethod" required>
+          <option value="card">Credit/Debit Card</option>
+          <option value="cod">Cash on Delivery</option>
+        </select>
+
+        <button type="submit" class="btn-primary">Place Order</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <h3>Lydia Creation</h3>
+      <p class="subtle">Timeless womenswear crafted with care.</p>
+      <div class="subtle">© <span id="year"></span> Lydia Creation</div>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <a href="/shop.html">All products</a><br>
+      <a href="/cart.html">Cart</a>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <a href="/contact.html">Contact</a><br>
+      <a href="/newsletter.html">Newsletter</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Set year
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Load cart from localStorage
+let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+function updateCartUI() {
+  const cartItemsContainer = document.getElementById('cartItems');
+  cartItemsContainer.innerHTML = '';
+
+  let subtotal = 0;
+  cart.forEach(item => {
+    subtotal += item.price * item.qty;
+
+    const cartItem = document.createElement('div');
+    cartItem.className = 'cart-item';
+    cartItem.innerHTML = `
+      <div class="cart-item-thumb"><img src="${item.img}" alt="${item.name}"></div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="qty-control">
+          <button onclick="updateQuantity('${item.productId}', -1)">-</button>
+          <input type="text" value="${item.qty}" readonly>
+          <button onclick="updateQuantity('${item.productId}', 1)">+</button>
+        </div>
+        <div class="line-price">₹${item.price * item.qty}</div>
+      </div>
+    `;
+    cartItemsContainer.appendChild(cartItem);
+  });
+
+  const shipping = subtotal > 0 ? 100 : 0;
+  const tax = Math.round(subtotal * 0.18);
+  const total = subtotal + shipping + tax;
+
+  document.getElementById('subtotal').textContent = `₹${subtotal}`;
+  document.getElementById('shipping').textContent = `₹${shipping}`;
+  document.getElementById('tax').textContent = `₹${tax}`;
+  document.getElementById('total').textContent = `₹${total}`;
+
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function updateQuantity(id, delta) {
+  const item = cart.find(p => p.productId == id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) cart = cart.filter(p => p.productId != id);
+  updateCartUI();
+}
+
+// Handle checkout form
+document.getElementById('checkoutForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (!cart.length) {
+    alert('Your cart is empty!');
+    return;
+  }
+
+  const order = {
+    name: document.getElementById('shipName').value,
+    address: document.getElementById('shipAddress').value,
+    city: document.getElementById('shipCity').value,
+    zip: document.getElementById('shipZip').value,
+    phone: document.getElementById('shipPhone').value,
+    payment: document.getElementById('paymentMethod').value,
+    items: cart,
+    total: cart.reduce((sum, i) => sum + i.price * i.qty, 0)
+  };
+
+  // Send order to backend
+  fetch('/api/orders', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(order)
+  }).then(res => res.json())
+    .then(data => {
+      alert('Order placed successfully!');
+      localStorage.removeItem('cart');
+      window.location.href = '/thankyou.html';
+    })
+    .catch(err => console.error('Checkout failed', err));
+});
+
+// Initialize cart UI
+updateCartUI();
+</script>
+
 </body>
 </html>

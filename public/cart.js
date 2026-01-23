@@ -3,7 +3,7 @@ let cart = []; // holds items added to cart
 // -------------------- Load Products from JSON --------------------
 async function loadProducts() {
   try {
-    const response = await fetch('/product.json'); // fetch JSON file
+    const response = await fetch('product.json');
     const products = await response.json();
 
     const container = document.getElementById('productsListContainer');
@@ -23,12 +23,13 @@ async function loadProducts() {
           <div class="price">₹${product.ProductPrice}</div>
         </div>
         <div class="product-actions">
-          <button class="btn btn-primary"
-            onclick="addToCart('${product.ProductID}', '${product.ProductName}', ${product.ProductPrice}, '${product.ProductImage}')">
-            Add to Cart
-          </button>
+          <button class="btn btn-primary">Add to Cart</button>
         </div>
       `;
+
+      card.querySelector("button").addEventListener("click", () => {
+        addToCart(product.ProductID, product.ProductName, product.ProductPrice, product.ProductImage);
+      });
 
       container.appendChild(card);
     });
@@ -39,7 +40,10 @@ async function loadProducts() {
 
 // -------------------- Add to Cart --------------------
 function addToCart(id, name, price, image) {
-  const existing = cart.find(item => item.id == id); // allow string/number match
+  // fallback unique ID if missing
+  if (!id) id = name + "_" + Date.now();
+
+  const existing = cart.find(item => item.id == id);
   if (existing) {
     existing.qty += 1;
   } else {
@@ -49,17 +53,15 @@ function addToCart(id, name, price, image) {
   showToast(`${name} added to cart!`);
 }
 
-// -------------------- Update Quantity --------------------
-function updateQuantity(id, delta) {
+// -------------------- Set Quantity --------------------
+function setQuantity(id, value) {
   const item = cart.find(p => p.id == id);
   if (!item) return;
 
-  item.qty += delta;
+  let qty = parseInt(value);
+  if (isNaN(qty) || qty < 1) qty = 1;
 
-  if (item.qty <= 0) {
-    cart = cart.filter(p => p.id != id);
-  }
-
+  item.qty = qty;
   updateCartUI();
 }
 
@@ -84,15 +86,21 @@ function updateCartUI() {
         <div class="cart-item-name">${item.name}</div>
         <div class="cart-item-controls">
           <div class="qty-control">
-            <button class="qty-minus" onclick="updateQuantity('${item.id}', -1)">-</button>
-            <input type="text" value="${item.qty}" readonly>
-            <button class="qty-plus" onclick="updateQuantity('${item.id}', 1)">+</button>
+            <input type="number" min="1" value="${item.qty}">
           </div>
           <div class="line-price">₹${item.price * item.qty}</div>
-          <button class="remove-link" onclick="removeItem('${item.id}')">Remove</button>
+          <button class="remove-link">Remove</button>
         </div>
       </div>
     `;
+
+    // attach listeners
+    cartItem.querySelector("input").addEventListener("change", e => {
+      setQuantity(item.id, e.target.value);
+    });
+    cartItem.querySelector(".remove-link").addEventListener("click", () => {
+      removeItem(item.id);
+    });
 
     cartItemsContainer.appendChild(cartItem);
   });
@@ -113,6 +121,7 @@ function updateCartUI() {
 
 // -------------------- Remove Item --------------------
 function removeItem(id) {
+  console.log("Removing item with id:", id);
   cart = cart.filter(p => p.id != id);
   updateCartUI();
 }
@@ -138,5 +147,5 @@ document.addEventListener('DOMContentLoaded', () => {
     cart = JSON.parse(storedCart);
     updateCartUI();
   }
-  //loadProducts();
+  // loadProducts();
 });
