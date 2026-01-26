@@ -4,60 +4,79 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Shop — Lydia Creation</title>
-  <link rel="stylesheet" href="main.css">
+  <link href="/css/main.css" rel="stylesheet">
 </head>
 <body>
-
-  <!-- Shared Header -->
-   <header aria-label="Site header">
-  <div class="container nav">
-    <div class="brand">
-      <div class="brand-logo" aria-hidden="true"></div>
-      <div class="brand-name">Lydia Creation</div>
+  <!-- header: keep same markup as index.html -->
+  <header class="nav header">
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-logo"><img src="/images/logo.png" alt="Lydia Creation logo"></div>
+        <div class="brand-name">Lydia Creation</div>
+      </div>
+      <nav class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/product.html">Shop</a>
+        <a href="/about.html">About</a>
+        <a href="/lookbook.html">Lookbook</a>
+        <a href="/blog.html">Blog</a>
+        <a href="/contact.html">Contact</a>
+        <a class="cta-btn" href="/cart.html">Cart</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span></button>
     </div>
-    <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
-      <a href="/" class="active">Home</a>
-      <a href="/shop.html">Shop</a>
-      <a href="/cart.html">Cart <span class="cart-count">0</span></a>
-      <a href="/checkout.html">Checkout</a>
-      <a href="/contact.html">Contact</a>
-    </nav>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false"><span></span></button>
-  </div>
-</header>
-
+  </header>
 
   <main class="container">
-    <h2>Shop Lydia Creation</h2>
-    <div class="filters">
-      <!-- category, size, color, occasion, price filters -->
-    </div>
-    <div id="productGrid" class="products"></div>
+    <section>
+      <div class="section-header">
+        <h2>All Products</h2>
+        <p>Browse everything in one place.</p>
+      </div>
+
+      <div id="productList" class="products"></div>
+    </section>
   </main>
 
-  <!-- Shared Footer -->
-   <footer>
-  <div class="container footer-grid">
-    <div>
-      <h3>Lydia Creation</h3>
-      <p class="subtle">Timeless womenswear crafted with care.</p>
-      <div class="subtle">© <span id="year"></span> Lydia Creation</div>
-    </div>
-    <div>
-      <h4>Shop</h4>
-      <a href="/shop.html">All products</a><br>
-      <a href="/cart.html">Cart</a>
-    </div>
-    <div>
-      <h4>Support</h4>
-      <a href="/contact.html">Contact</a><br>
-      <a href="/newsletter.html">Newsletter</a>
-    </div>
-  </div>
-</footer>
-
-  
-
-  <script src="main.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    // fetch products from backend and render
+    async function loadProducts() {
+      const res = await fetch('/api/products');
+      const data = await res.json();
+      const list = document.getElementById('productList');
+      list.innerHTML = '';
+      if (!data.success) { list.innerHTML = '<p class="muted">Unable to load products.</p>'; return; }
+      data.products.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'card product';
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.name}">
+          <div class="card-body">
+            <h3>${p.name}</h3>
+            <div class="muted">${p.size} • ${p.color} • ${p.occasion}</div>
+            <div class="price">₹${p.price}</div>
+            <div class="product-actions">
+              <a class="btn-outline" href="/product-detail.html?id=${p.id}">View</a>
+              <button class="btn-primary add-to-cart" data-id="${p.id}">Add to cart</button>
+            </div>
+          </div>`;
+        list.appendChild(card);
+      });
+      // attach add-to-cart handlers
+      document.querySelectorAll('.add-to-cart').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.id;
+          const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+          const existing = cart.find(i => i.productId === id);
+          if (existing) existing.qty += 1; else cart.push({ productId: id, qty: 1 });
+          localStorage.setItem('cart', JSON.stringify(cart));
+          btn.textContent = 'Added';
+          setTimeout(()=> btn.textContent = 'Add to cart', 800);
+        });
+      });
+    }
+    loadProducts();
+  </script>
 </body>
 </html>

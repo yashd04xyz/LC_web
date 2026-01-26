@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Order Confirmed — Lydia Creation</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    .thank-you-card {
+      max-width: 600px;
+      margin: 4rem auto;
+      text-align: center;
+      padding: 2rem;
+      border: 1px solid #eee;
+      border-radius: 8px;
+    }
+    .order-details {
+      text-align: left;
+      background: #f9f9f9;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      border-radius: 4px;
+    }
+    .order-item-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<main class="container">
+  <div class="thank-you-card">
+    <div class="success-icon" style="font-size: 3rem;">✔️</div>
+    <h1>Thank you for your order!</h1>
+    <p>We've received your request and are getting it ready for shipment.</p>
+    
+    <div id="receipt" class="order-details">
+      <h3>Order Summary</h3>
+      <div id="receiptItems"></div>
+      <hr>
+      <p><strong>Total Paid: <span id="receiptTotal"></span></strong></p>
+      <p><small>Shipping to: <span id="receiptAddr"></span></small></p>
+    </div>
+
+    <a href="/shop.html" class="btn-primary" style="display:inline-block; margin-top: 2rem; width: auto;">Continue Shopping</a>
+  </div>
+</main>
+
+<script>
+  // Retrieve the order from session storage
+  const lastOrder = JSON.parse(sessionStorage.getItem('lastOrder'));
+
+  if (!lastOrder) {
+    // If someone visits this page directly without an order, send them home
+    window.location.href = '/';
+  } else {
+    const itemsContainer = document.getElementById('receiptItems');
+    lastOrder.items.forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'order-item-row';
+      row.innerHTML = `<span>${item.qty}x ${item.name}</span> <span>₹${item.price * item.qty}</span>`;
+      itemsContainer.appendChild(row);
+    });
+
+    document.getElementById('receiptTotal').textContent = `₹${lastOrder.total}`;
+    document.getElementById('receiptAddr').textContent = `${lastOrder.address}, ${lastOrder.city}`;
+  }
+</script>
+</body>
+</html>

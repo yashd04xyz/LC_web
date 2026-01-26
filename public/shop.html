@@ -1,144 +1,342 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lydia Creation | Elegance Redefined</title>
-  <meta name="description" content="Lydia Creation is a modern, elegant women's clothing brand. Shop dresses, tops, ethnic wear, and accessories." />
-  <meta name="keywords" content="Lydia Creation, women's clothing, dresses, ethnic wear, fashion, lookbook"/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-  <!-- External stylesheet -->
-  <link rel="stylesheet" href="main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Archive | Lydia Creation | Elegance Redefined</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-black: #0a0a0a;
+            --brand-gold: #d4a38d;
+            --brand-white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.05);
+            --transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        body {
+            background: var(--brand-black);
+            color: var(--brand-white);
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(212, 163, 141, 0.15);
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 10, 0.95);
+            z-index: 1000;
+            backdrop-filter: blur(15px);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: var(--brand-gold);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover { color: var(--brand-gold); }
+
+        /* Filters & Search Section */
+        .controls-section {
+            background: #111;
+            padding: 30px 20px;
+            border-bottom: 1px solid #222;
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 18px 25px;
+            background: transparent;
+            border: 1px solid #333;
+            color: white;
+            outline: none;
+            font-family: 'Lato';
+            transition: var(--transition);
+        }
+
+        .search-input:focus { border-color: var(--brand-gold); }
+
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .filter-group { display: flex; align-items: center; gap: 10px; }
+        .filter-group label { font-size: 0.7rem; text-transform: uppercase; color: #888; letter-spacing: 1px; }
+
+        .filter-bar select {
+            background: #1a1a1a;
+            color: var(--brand-white);
+            border: 1px solid #333;
+            padding: 10px 15px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            cursor: pointer;
+            outline: none;
+        }
+
+        /* Product Grid */
+        #productGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+            padding: 60px 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: #0f0f0f;
+            border: 1px solid #1a1a1a;
+            text-align: center;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .product-card:hover { border-color: var(--brand-gold); transform: translateY(-10px); }
+
+        .img-wrapper { position: relative; overflow: hidden; cursor: pointer; }
+        .product-card img { width: 100%; height: 450px; object-fit: cover; transition: 0.6s; }
+        .product-card:hover img { transform: scale(1.05); }
+
+        .quick-view-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: 0.3s;
+        }
+        .product-card:hover .quick-view-overlay { opacity: 1; }
+
+        .product-meta { padding: 30px; }
+        .product-name { font-family: 'Playfair Display'; font-size: 1.2rem; margin-bottom: 8px; }
+        .price { color: var(--brand-gold); font-weight: 700; font-size: 1.1rem; }
+
+        .btn-lux {
+            background: transparent;
+            color: var(--brand-gold);
+            border: 1px solid var(--brand-gold);
+            padding: 14px 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            width: 100%;
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+
+        .btn-lux:hover { background: var(--brand-gold); color: black; }
+
+        .rental-badge {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: var(--brand-gold);
+            color: black;
+            font-size: 10px;
+            padding: 6px 14px;
+            font-weight: 700;
+            z-index: 10;
+            letter-spacing: 1px;
+        }
+
+        /* Quick View Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            backdrop-filter: blur(12px);
+        }
+
+        .modal-content {
+            background: #111;
+            width: 95%;
+            max-width: 1000px;
+            border: 1px solid rgba(212, 163, 141, 0.3);
+            position: relative;
+            animation: modalFade 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        @keyframes modalFade {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-body { display: grid; grid-template-columns: 1.2fr 1fr; }
+        .modal-image img { width: 100%; height: 600px; object-fit: cover; }
+        .modal-info { padding: 50px; display: flex; flex-direction: column; justify-content: center; }
+
+        .close-modal {
+            position: absolute;
+            top: 20px; right: 25px;
+            background: none; border: none;
+            color: var(--brand-gold); font-size: 2.5rem; cursor: pointer;
+            z-index: 10;
+        }
+
+        /* Toast */
+        #toast {
+            position: fixed;
+            bottom: 40px; right: 40px;
+            background: var(--brand-gold); color: black;
+            padding: 18px 40px; display: none;
+            z-index: 4000; font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        @media (max-width: 850px) {
+            .modal-body { grid-template-columns: 1fr; }
+            .modal-image img { height: 400px; }
+            .modal-info { padding: 30px; }
+        }
+    </style>
 </head>
+<body>
 
-<header aria-label="Site header">
-  <div class="container nav">
-    <div class="brand">
-      <div class="brand-logo" aria-hidden="true"></div>
-      <div class="brand-name">Lydia Creation</div>
+<header>
+    <div class="nav">
+        <a href="index.html" class="brand-name">LYDIA CREATION</a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="shop.html" style="color: var(--brand-gold);">Archive</a>
+            <a href="cart.html" id="cartNav">Cart(0)</a>
+        </nav>
     </div>
-
-    <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
-      <a href="/">Home</a>
-      <a href="/shop.html">Shop</a>
-      <a href="#about">About</a>
-      <a href="#lookbook">Lookbook</a>
-      <a href="/cart.html">Cart</a>
-      <a href="/blog-post.html">Blog</a>
-      <a href="/contact.html">Contact</a>
-      <a class="cta-btn" href="/shop.html">Shop Now</a>
-    </nav>
-
-    <button
-      class="hamburger"
-      id="hamburger"
-      aria-label="Toggle menu"
-      aria-controls="navLinks"
-      aria-expanded="false"
-    >
-      <span aria-hidden="true"></span>
-    </button>
-  </div>
 </header>
-   
-    <section id="shop">
-      <div class="container">
-        <div class="section-header">
-          <h2>Shop Lydia Creation</h2>
-          <p>Filter by size, color, price, and occasion to find your perfect piece.</p>
+
+<main>
+    <div class="controls-section">
+        <div class="search-container">
+            <input type="text" id="shopSearch" class="search-input" placeholder="Search by name, fabric, or style...">
         </div>
 
-        <div class="filters" aria-label="Product filters">
-          <select id="filterCategory" aria-label="Category">
-            <option value="all">All categories</option>
-            <option value="dresses">Dresses</option>
-            <option value="tops">Tops & Blouses</option>
-            <option value="ethnic">Ethnic Wear</option>
-            <option value="accessories">Accessories</option>
-          </select>
-          <select id="filterSize" aria-label="Size">
-            <option value="all">All sizes</option>
-            <option value="XS">XS</option>
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-          </select>
-          <select id="filterColor" aria-label="Color">
-            <option value="all">All colors</option>
-            <option value="pink">Pink</option>
-            <option value="black">Black</option>
-            <option value="white">White</option>
-            <option value="gold">Gold</option>
-            <option value="lavender">Lavender</option>
-          </select>
-          <select id="filterOccasion" aria-label="Occasion">
-            <option value="all">All occasions</option>
-            <option value="casual">Casual</option>
-            <option value="work">Work</option>
-            <option value="festive">Festive</option>
-            <option value="evening">Evening</option>
-          </select>
-          <div>
-            <label class="muted" for="filterPrice">Max price: <span id="priceLabel">2999</span></label>
-            <input type="range" id="filterPrice" min="499" max="4999" step="100" value="2999" aria-label="Max price">
-          </div>
-        </div>
-
-        <div class="products" id="productGrid" aria-live="polite">
-          
-
-      </div>
-    </section>
-
-    <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true" role="dialog" aria-modal="true">
-      <div class="modal" role="document" aria-labelledby="modalTitle">
-        <div class="modal-header">
-          <h3 id="modalTitle">Quick view</h3>
-          <button class="modal-close" id="modalClose" aria-label="Close">×</button>
-        </div>
-        <div class="modal-body">
-          <div>
-            <img id="modalImg" src="" alt="Product image">
-          </div>
-          <div>
-            <h3 id="modalName"></h3>
-            <div class="price" id="modalPrice"></div>
-            <p id="modalDesc" class="muted"></p>
-            <div class="product-actions">
-              <button class="btn-primary" id="modalAdd">Add to cart</button>
-              <button class="btn-outline" id="modalClose2">Close</button>
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label>Category</label>
+                <select id="filterCategory">
+                    <option value="all">Everything</option>
+                    <option value="dresses">Dresses</option>
+                    <option value="ethnic">Ethnic Wear</option>
+                    <option value="couture">Couture</option>
+                </select>
             </div>
-          </div>
+            
+            <div class="filter-group">
+                <label>Size</label>
+                <select id="filterSize">
+                    <option value="all">All Sizes</option>
+                    <option value="S">Small (S)</option>
+                    <option value="M">Medium (M)</option>
+                    <option value="L">Large (L)</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Budget (Max: ₹<span id="priceVal">15000</span>)</label>
+                <input type="range" id="filterPrice" min="1000" max="15000" value="15000" step="500">
+            </div>
         </div>
-      </div>
     </div>
 
-  </main>
+    <h1 style="text-align:center; font-family: 'Playfair Display'; font-weight: 400; font-style: italic; margin: 60px 0 20px; font-size: 3rem;">The Archive</h1>
+    <p style="text-align:center; color: #666; text-transform: uppercase; letter-spacing: 4px; font-size: 0.7rem; margin-bottom: 40px;">Curated Masterpieces for the Discerning</p>
 
-  <footer>
-    <div class="container footer-grid">
-      <div>
-        <h3>Lydia Creation</h3>
-        <p class="subtle">Timeless womenswear crafted with care.</p>
-        <div class="subtle" style="margin-top:12px;">© <span id="year"></span> Lydia Creation</div>
-      </div>
-      <div>
-        <h4>Shop</h4>
-        <a href="\shop.html">All products</a><br>
-        <a href="#collections">Collections</a>
-      </div>
-      <div>
-        <h4>Support</h4>
-        <a href="\contact.html">Contact</a><br>
-        <a href="#newsletter">Newsletter</a>
-      </div>
+    <div id="productGrid">
+        </div>
+</main>
+
+<div id="quickViewModal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeQuickView()">&times;</button>
+        <div class="modal-body">
+            <div class="modal-image">
+                <img id="modalImg" src="" alt="Product Detail">
+            </div>
+            <div class="modal-info">
+                <h2 id="modalTitle" style="font-family: 'Playfair Display'; font-size: 2.2rem; margin-bottom: 10px; color: var(--brand-gold);"></h2>
+                <p id="modalFabric" style="text-transform: uppercase; font-size: 0.75rem; color: #888; letter-spacing: 2px; margin-bottom: 20px;"></p>
+                <div id="modalPrice" class="price" style="font-size: 1.8rem; margin-bottom: 25px;"></div>
+                
+                <div style="border-top: 1px solid #222; padding-top: 25px; margin-bottom: 30px;">
+                    <p style="color: #bbb; font-size: 0.95rem; line-height: 1.8;">
+                        This exclusive piece from the <em>Lydia Archive</em> represents our commitment to timeless elegance. 
+                        Handcrafted with premium textiles and meticulous attention to detail.
+                    </p>
+                </div>
+
+                <button id="modalAddBtn" class="btn-lux">Add to Selection</button>
+            </div>
+        </div>
     </div>
-  </footer>
+</div>
 
- <script src="main.js"></script>
+<div id="toast">Selection Updated</div>
 
- 
+<script src="main.js"></script>
+<script>
+    // Price Slider UI Update
+    const priceSlider = document.getElementById('filterPrice');
+    const priceDisplay = document.getElementById('priceVal');
+    
+    priceSlider.oninput = function() {
+        priceDisplay.innerHTML = this.value;
+    }
 
+    // Modal Close logic
+    function closeQuickView() {
+        document.getElementById('quickViewModal').style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scroll
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        const modal = document.getElementById('quickViewModal');
+        if (event.target == modal) closeQuickView();
+    }
+</script>
 </body>
 </html>

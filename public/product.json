@@ -1,89 +1,92 @@
 [
-
-
   {
     "ProductID": 1,
     "ProductName": "Blush Evening Dress",
-    "ProductImage": "/images/eveningdress.jpg",
+    "ProductImage": "images/eveningdress.jpg",
     "ProductInfo": "Size M • Pink • Evening",
     "ProductPrice": 2799,
     "Category": "dresses",
     "Size": "M",
     "Color": "pink",
     "Occasion": "evening",
-    "Description": "A flowing blush dress with gentle pleats and a flattering waist."
+    "Description": "A flowing blush dress with gentle pleats and a flattering waist.",
+    "isRental": true
   },
-
   {
     "ProductID": 2,
     "ProductName": "Classic Black Dress",
-    "ProductImage": "/images/pink.jpg",
-    "ProductInfo": "Size S • Black • Evening",
+    "ProductImage": "images/pink.jpg",
     "ProductPrice": 3499,
     "Category": "dresses",
     "Size": "S",
     "Color": "black",
     "Occasion": "evening",
-    "Description": "Timeless black dress with refined neckline and tailored fit."
+    "Description": "Timeless black dress with refined neckline and tailored fit.",
+    "isRental": true
   },
   {
     "ProductID": 7,
     "ProductName": "White Silk Blouse",
-    "ProductImage": "/images/white.jpg",
+    "ProductImage": "images/white.jpg",
     "ProductInfo": "Size L • White • Work",
     "ProductPrice": 1299,
     "Category": "tops",
     "Size": "L",
     "Color": "white",
     "Occasion": "work",
-    "Description": "Soft silk blend blouse with subtle sheen and buttoned cuffs."
+    "Description": "Soft silk blend blouse with subtle sheen and buttoned cuffs.",
+    "isRental": false
   },
   {
     "ProductID": 3,
     "ProductName": "Lavender Peplum Top",
-    "ProductImage": "/images/red.jpg",
+    "ProductImage": "images/red.jpg",
     "ProductInfo": "Size M • Lavender • Casual",
     "ProductPrice": 999,
     "Category": "tops",
     "Size": "M",
     "Color": "lavender",
     "Occasion": "casual",
-    "Description": "Playful peplum silhouette with soft stretch fabric."
+    "Description": "Playful peplum silhouette with soft stretch fabric.",
+    "isRental": false
   },
   {
     "ProductID": 4,
     "ProductName": "Gold Festive Kurta Set",
-    "ProductImage": "/images/or.jpg",
+    "ProductImage": "images/or.jpg",
     "ProductInfo": "Size XL • Gold • Festive",
     "ProductPrice": 2999,
     "Category": "ethnic",
     "Size": "XL",
     "Color": "gold",
     "Occasion": "festive",
-    "Description": "Elegant kurta set with delicate embroidery and comfortable fit."
+    "Description": "Elegant kurta set with delicate embroidery and comfortable fit.",
+    "isRental": true
   },
   {
     "ProductID": 5,
     "ProductName": "Structured Black Tote",
-    "ProductImage": "/images/pink.jpg",
+    "ProductImage": "images/pink.jpg",
     "ProductInfo": "One size • Black • Work",
     "ProductPrice": 799,
     "Category": "accessories",
     "Size": "NA",
     "Color": "black",
     "Occasion": "work",
-    "Description": "Minimal tote with gold accents and roomy interior."
+    "Description": "Minimal tote with gold accents and roomy interior.",
+    "isRental": false
   },
   {
     "ProductID": 6,
     "ProductName": "Blush Sheen Scarf",
-    "ProductImage": "/images/pink.jpg",
+    "ProductImage": "images/pink.jpg",
     "ProductInfo": "One size • Pink • Casual",
     "ProductPrice": 599,
     "Category": "accessories",
     "Size": "NA",
     "Color": "pink",
     "Occasion": "casual",
-    "Description": "Lightweight scarf with soft finish and elegant drape."
+    "Description": "Lightweight scarf with soft finish and elegant drape.",
+    "isRental": false
   }
 ]

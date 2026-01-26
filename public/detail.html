@@ -5,6 +5,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Product — Lydia Creation</title>
   <link href="main.css" rel="stylesheet">
+  <style>
+  :root {
+    --primary-color: #2d2d2d; /* Elegant Dark Charcoal */
+    --accent-color: #bfa37e;  /* Muted Gold */
+    --text-light: #ffffff;
+    --bg-light: #faf9f6;     /* Off-white Silk */
+  }
+
+  body {
+    background-color: var(--bg-light);
+    color: var(--primary-color);
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+  }
+
+  /* --- BUTTON STYLES (The Visibility Fix) --- */
+  .btn-primary, .cta-btn, button[type="submit"] {
+    background-color: var(--primary-color) !important;
+    color: var(--text-light) !important;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 700;
+    transition: background 0.3s ease;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+  }
+
+  .btn-primary:hover, .cta-btn:hover {
+    background-color: var(--accent-color) !important;
+  }
+
+  .btn-secondary {
+    background-color: transparent !important;
+    color: var(--primary-color) !important;
+    border: 2px solid var(--primary-color) !important;
+    padding: 10px 26px;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--primary-color) !important;
+    color: var(--text-light) !important;
+  }
+
+  /* --- NAVIGATION --- */
+  header {
+    background: #fff;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .nav-links a {
+    margin-right: 20px;
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 400;
+  }
+
+  /* --- HERO SECTION --- */
+  .hero {
+    padding: 80px 0;
+    background-color: #f2f0ed;
+  }
+
+  .hero-wrap {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* --- INPUT FIELDS --- */
+  input, textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  /* --- UTILITY --- */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+</style>
 </head>
 <body>
   <!-- header same as other pages -->

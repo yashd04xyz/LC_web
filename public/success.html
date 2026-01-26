@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed | Lydia Creation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .success-wrapper {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: var(--brand-black);
+        }
+
+        .confirmation-icon {
+            font-size: 50px;
+            color: var(--brand-gold);
+            margin-bottom: 30px;
+            border: 1px solid var(--brand-gold);
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .order-id {
+            color: var(--brand-gold);
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+
+        .success-text {
+            max-width: 500px;
+            margin: 20px auto;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav">
+            <a href="index.html" class="brand-name">LYDIA CREATION</a>
+        </div>
+    </header>
+
+    <main class="container success-wrapper">
+        <div class="confirmation-icon">✓</div>
+        <h1 style="font-family: 'Playfair Display'; font-size: 3rem;">Thank You</h1>
+        <p style="text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem;">Your order has been received</p>
+        
+        <div class="success-text">
+            <p>Our artisans have begun preparing your selection. You will receive an email confirmation shortly with tracking details once your pieces leave our studio.</p>
+        </div>
+
+        <p class="order-id">ORDER ID: <span id="displayOrderId">LC-000000</span></p>
+
+        <a href="shop.html" class="btn-primary" style="margin-top: 40px;">Return to Archive</a>
+    </main>
+
+    <script>
+        // Retrieve Order ID from URL params (set during checkout)
+        const params = new URLSearchParams(window.location.search);
+        const orderId = params.get('id');
+        if (orderId) {
+            document.getElementById('displayOrderId').innerText = orderId;
+        }
+
+        // Clear the cart since the order is complete
+        localStorage.removeItem('lydia_cart');
+    </script>
+</body>
+</html>

@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Lydia Creation | Elegance Redefined</title>
   <meta name="description" content="Lydia Creation is a modern, elegant women's clothing brand. Shop dresses, tops, ethnic wear, and accessories." />
-  <meta name="keywords" content="Lydia Creation, women's clothing, dresses, ethnic wear, fashion, lookbook" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-  <!-- External stylesheet -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="main.css">
 </head>
 
@@ -16,20 +14,24 @@
   <header aria-label="Site header">
     <div class="container nav">
       <div class="brand">
-        <div class="brand-logo"><aria-hidden="true"></div>
-        <div class="brand-name">Lydia Creation</div>
+        <a href="index.html" style="text-decoration: none;">
+            <div class="brand-name">Lydia Creation</div>
+        </a>
       </div>
+      
       <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
-        <a href="\">Home</a>
-        <a href="\shop.html">Shop</a>
+        <a href="index.html">Home</a>
+        <a href="shop.html">Archive</a>
         <a href="#about">About</a>
         <a href="#lookbook">Lookbook</a>
-        <a href="\cart.html">Cart</a>
-        <a href="\blog-post.html">Blog</a>
-        <a href="\contact.html">Contact</a>
-        <a class="cta-btn" href="\shop.html">Shop Now</a>
+        <a href="cart.html" id="cartNav">Cart(0)</a>
+        <a href="contact.html">Contact</a>
+        <a class="cta-btn" href="shop.html">Shop Now</a>
       </nav>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+      
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+      </button>
     </div>
   </header>
 
@@ -37,16 +39,16 @@
     <section id="home" class="hero">
       <div class="container hero-wrap">
         <div class="hero-text">
-          <h1>Elegance Redefined</h1>
+          <h1>Elegance <br><span style="font-style: italic; font-weight: 400;">Redefined</span></h1>
           <p>Discover thoughtfully crafted womenswear—timeless silhouettes, graceful details, and fabrics that feel as good as they look.</p>
           <div class="hero-actions">
-            <a class="btn-primary" href="\shop.html">Shop Now</a>
-            <button class="btn-secondary" id="filterNew">New Arrivals</button>
+            <a class="btn-primary" href="shop.html">Explore Archive</a>
+            <a class="btn-secondary" href="shop.html?filter=new">New Arrivals</a>
           </div>
         </div>
-        <div class="hero-image" aria-hidden="true">
-          <img src="images\hero.jpg" alt="Elegant models showcasing Lydia Creation outfits">
-        <div class="hero-badge">Free shipping over ₹1999</div>
+        <div class="hero-image">
+          <img src="images/hero.jpg" alt="Lydia Creation Signature Style">
+          <div class="hero-badge">Bespoke Fitting Available</div>
         </div>
       </div>
     </section>
@@ -54,138 +56,54 @@
     <section id="collections">
       <div class="container">
         <div class="section-header">
-          <h2>Featured collections</h2>
-          <p>Curated pieces for every moment—celebrations, everyday elegance, and everything in between.</p>
+          <h2 style="font-family: 'Playfair Display'; font-style: italic;">The Collections</h2>
+          <p>Curated pieces for celebrations and everyday elegance.</p>
         </div>
         <div class="grid grid-4">
           <div class="card">
-            <img src="images\pink.jpg" alt="Dresses collection">
+            <div class="card-img-wrap"><img src="images/pink.jpg" alt="Dresses"></div>
             <div class="card-body">
               <h3>Dresses</h3>
               <p>Flowing silhouettes, refined details.</p>
-              <span class="chip"><a href="\shop.html">Shop dresses</a> </span>
-              
+              <a href="shop.html?cat=dresses" class="card-link">View Collection</a>
             </div>
           </div>
           <div class="card">
-            <img src="images\eveningdress.jpg" alt="sareeand blouses collection">
+            <div class="card-img-wrap"><img src="images/eveningdress.jpg" alt="Sarees"></div>
             <div class="card-body">
               <h3>Saree & Blouses</h3>
               <p>Soft fabrics, polished cuts.</p>
-              <span class="chip"><a href="\shop.html">Shop tops</a> </span>
+              <a href="shop.html?cat=ethnic" class="card-link">View Collection</a>
             </div>
           </div>
           <div class="card">
-            <img src="images\e.jpg" alt="Ethnic wear collection">
+            <div class="card-img-wrap"><img src="images/e.jpg" alt="Ethnic"></div>
             <div class="card-body">
               <h3>Ethnic Wear</h3>
               <p>Sarees, kurtis, festive sets.</p>
-              <span class="chip">Shop ethnic</span>
+              <a href="shop.html?cat=ethnic" class="card-link">View Collection</a>
             </div>
           </div>
           <div class="card">
-            <img src="images\bag.jpg" alt="Accessories">
+            <div class="card-img-wrap"><img src="images/bag.jpg" alt="Accessories"></div>
             <div class="card-body">
               <h3>Accessories</h3>
               <p>Bags, scarves, jewelry accents.</p>
-              <span class="chip">Shop accessories</span>
+              <a href="shop.html?cat=accessories" class="card-link">View Collection</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="testimonials">
+    <section id="testimonials" style="background: #0f0f0f; padding: 100px 0;">
       <div class="container">
-        <div class="section-header">
-          <h2>What our customers say</h2>
-          <p>Real words from women who wear Lydia Creation with confidence and joy.</p>
-        </div>
-        <div class="slider" aria-label="Testimonials slider">
+        <div class="slider">
           <div class="slides" id="slides">
-            <div class="slide" role="group" aria-roledescription="slide" aria-label="1 of 3">
-              <p>“The fabric quality is amazing—soft yet structured. I felt effortlessly elegant.”</p>
-              <div class="badge">Aisha, Mumbai</div>
+            <div class="slide">
+              <p class="quote">“The fabric quality is amazing—soft yet structured. I felt effortlessly elegant.”</p>
+              <div class="author">— Aisha, Mumbai</div>
             </div>
-            <div class="slide" role="group" aria-roledescription="slide" aria-label="2 of 3">
-              <p>“Perfect fits and beautiful details. Got so many compliments at my cousin’s sangeet!”</p>
-              <div class="badge">Meera, Delhi</div>
-            </div>
-            <div class="slide" role="group" aria-roledescription="slide" aria-label="3 of 3">
-              <p>“Love the timeless styles. My go-to brand for both work and celebrations.”</p>
-              <div class="badge">Rhea, Bengaluru</div>
-            </div>
-          </div>
-          <div class="slider-controls" id="sliderDots" aria-label="Slider controls"></div>
-        </div>
-        <div class="tip">Tip: Sign up for our newsletter below to get early access to launches and limited editions.</div>
-      </div>
-    </section>
-
-    <section id="newsletter">
-      <div class="container">
-        <div class="section-header">
-          <h2>Join Lydia Creation</h2>
-          <p>Be first to know about new arrivals, styling tips, and exclusive offers.</p>
-        </div>
-        <form id="newsletterForm" aria-label="Newsletter signup">
-          <input type="email" id="newsletterEmail" name="email" placeholder="Enter your email" required aria-label="Email address">
-          <button class="btn-primary" type="submit">Subscribe</button>
-          <div id="newsletterMsg" role="status" class="muted" aria-live="polite"></div>
-        </form>
-      </div>
-    </section>
-
-   
-    <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true" role="dialog" aria-modal="true">
-      <div class="modal" role="document" aria-labelledby="modalTitle">
-        <div class="modal-header">
-          <h3 id="modalTitle">Quick view</h3>
-          <button class="modal-close" id="modalClose" aria-label="Close">×</button>
-        </div>
-        <div class="modal-body">
-          <div>
-            <img id="modalImg" src="" alt="Product image">
-          </div>
-          <div>
-            <h3 id="modalName"></h3>
-            <div class="price" id="modalPrice"></div>
-            <p id="modalDesc" class="muted"></p>
-            <div class="product-actions">
-              <button class="btn-primary" id="modalAdd">Add to cart</button>
-              <button class="btn-outline" id="modalClose2">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <section id="about">
-      <div class="container">
-        <div class="section-header">
-          <h2>About Lydia Creation</h2>
-          <p>We design clothing that honors grace and celebrates self-expression. Every piece is crafted for comfort, beauty, and longevity.</p>
-        </div>
-        <div class="about-grid">
-          <div class="about-card">
-            <h3>Our story</h3>
-            <p>Born from a love of timeless fashion and meaningful craftsmanship, Lydia Creation brings elegance to everyday life. We blend classic aesthetics with modern cuts to create versatile pieces that last.</p>
-          </div>
-          <div class="about-card">
-            <h3>Founder’s note</h3>
-            <p>“Fashion should feel like you—confident, comfortable, and true. Lydia Creation reflects the belief that style is a gentle power.”</p>
-          </div>
-          <div class="about-card">
-            <h3>Values</h3>
-            <ul>
-              <li><strong>Sustainability:</strong> Thoughtful materials and responsible production.</li>
-              <li><strong>Elegance:</strong> Designs that age beautifully.</li>
-              <li><strong>Inclusivity:</strong> Sizes and styles that embrace diversity.</li>
-            </ul>
-          </div>
-          <div class="about-card">
-            <h3>Craft</h3>
-            <p>We partner with skilled artisans and trusted suppliers to ensure quality stitching, reliable fits, and premium finishes.</p>
           </div>
         </div>
       </div>
@@ -194,82 +112,28 @@
     <section id="lookbook">
       <div class="container">
         <div class="section-header">
-          <h2>Lookbook</h2>
-          <p>Seasonal highlights and styling inspiration—see how our pieces come alive.</p>
+          <h2>The Lookbook</h2>
+          <p>Styling inspiration from our latest studio edits.</p>
         </div>
-        <div class="masonry">
-          <div class="item"><img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1200&auto=format&fit=crop" alt="Summer dress editorial"></div>
-          <div class="item"><img src="https://images.unsplash.com/photo-1520975968316-1fa4be1ab4c0?q=80&w=1200&auto=format&fit=crop" alt="Workwear blouse styling"></div>
-          <div class="item"><img src="/image/or.jpg" alt="Festive kurta set moment"></div>
-          <div class="item"><img src="https://images.unsplash.com/photo-1508424757105-b6d5ad195fd9?q=80&w=1200&auto=format&fit=crop" alt="Evening elegance edit"></div>
-          <div class="item"><img src="image/" alt="Accessories closeup"></div>
-        </div>
-        <div class="tip">
-          <strong>Style tip:</strong> Pair a soft blouse with a structured tote for a balanced, polished look. Add a blush scarf for warmth and texture.
+        <div class="masonry-grid">
+          <div class="m-item"><img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&q=80" alt="Editorial 1"></div>
+          <div class="m-item"><img src="https://images.unsplash.com/photo-1520975968316-1fa4be1ab4c0?auto=format&fit=crop&q=80" alt="Editorial 2"></div>
+          <div class="m-item"><img src="images/or.jpg" alt="Editorial 3"></div>
+          <div class="m-item"><img src="https://images.unsplash.com/photo-1508424757105-b6d5ad195fd9?auto=format&fit=crop&q=80" alt="Editorial 4"></div>
         </div>
       </div>
     </section>
 
-    <section id="blog">
+    <section id="newsletter">
       <div class="container">
-        <div class="section-header">
-          <h2>From the journal</h2>
-          <p>Thoughts on trends, styling guides, and behind-the-scenes from our studio.</p>
-        </div>
-        <div class="blog-list">
-          <article class="blog-card">
-            <img src="https://images.unsplash.com/photo-1520975891653-2cf9b5f5d77f?q=80&w=1400&auto=format&fit=crop" alt="Monochrome styling">
-            <div class="meta">
-              <h3>Monochrome magic: effortless elegance</h3>
-              <small>Fashion trends • 5 min read</small>
-              <p>Explore how single-tone outfits create a refined silhouette and simplify your wardrobe.</p>
-            </div>
-          </article>
-          <article class="blog-card">
-            <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1400&auto=format&fit=crop" alt="Event styling">
-            <div class="meta">
-              <h3>Dress for the moment: festive to evening</h3>
-              <small>Styling guides • 6 min read</small>
-              <p>From a gold kurta set to a classic black dress, here’s how to accessorize with grace.</p>
-            </div>
-          </article>
-          <article class="blog-card">
-            <img src="https://images.unsplash.com/photo-1490476322583-3d1694c0f5b3?q=80&w=1400&auto=format&fit=crop" alt="Studio behind the scenes">
-            <div class="meta">
-              <h3>Inside our studio: craftsmanship first</h3>
-              <small>Behind-the-scenes • 4 min read</small>
-              <p>Meet the people and processes shaping Lydia Creation’s signature finishes.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-  <section id="contact">
-      <div class="container">
-        <div class="section-header">
-          <h2>Contact</h2>
-          <p>Questions, collaborations, or wholesale inquiries — we'd love to hear from you.</p>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-          <form id="contactForm" aria-label="Contact form">
-            <input type="text" id="contactName" placeholder="Your name" required>
-            <input type="email" id="contactEmail" placeholder="Your email" required>
-            <input type="text" id="contactSubject" placeholder="Subject" required>
-            <textarea id="contactMessage" placeholder="Message" required></textarea>
-            <button class="btn-primary" type="submit">Send message</button>
-            <div id="contactMsg" role="status" class="muted" aria-live="polite"></div>
-          </form>
-          <div>
-            <h3>Visit us</h3>
-            <p class="muted">Studio address and opening hours can go here. For demo purposes this is placeholder content.</p>
-            <h3>Follow</h3>
-            <div class="socials">
-              <a href="#" aria-label="Instagram">IG</a>
-              <a href="#" aria-label="Facebook">FB</a>
-              <a href="#" aria-label="Pinterest">PT</a>
-            </div>
-          </div>
+        <div class="newsletter-wrap">
+            <h2>Join the Inner Circle</h2>
+            <p>Be the first to access limited edition Archive drops.</p>
+            <form id="newsletterForm" class="luxury-form">
+              <input type="email" id="newsletterEmail" placeholder="Email Address" required>
+              <button type="submit">Subscribe</button>
+            </form>
+            <div id="newsletterMsg" role="status"></div>
         </div>
       </div>
     </section>
@@ -277,26 +141,27 @@
 
   <footer>
     <div class="container footer-grid">
-      <div>
+      <div class="footer-brand">
         <h3>Lydia Creation</h3>
-        <p class="subtle">Timeless womenswear crafted with care.</p>
-        <div class="subtle" style="margin-top:12px;">© <span id="year"></span> Lydia Creation</div>
+        <p>Timeless womenswear crafted for the modern individual.</p>
       </div>
-      <div>
-        <h4>Shop</h4>
-        <a href="\shop.html">All products</a><br>
-        <a href="#collections">Collections</a>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="shop.html">Archive</a>
+        <a href="#lookbook">Lookbook</a>
+        <a href="cart.html">Shopping Bag</a>
       </div>
-      <div>
-        <h4>Support</h4>
-        <a href="#contact">Contact</a><br>
-        <a href="#newsletter">Newsletter</a>
+      <div class="footer-links">
+        <h4>Inquiries</h4>
+        <a href="#contact">Contact Us</a>
+        <a href="#about">Our Story</a>
       </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; <span id="year"></span> Lydia Creation. Elegance Redefined.
     </div>
   </footer>
 
- <script src="main.js"></script>
- <script src="/cart.js" defer></script>
-
+  <script src="main.js"></script>
 </body>
 </html>
